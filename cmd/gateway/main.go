@@ -6,16 +6,20 @@ import (
 	"log/slog"
 	"net/http"
 	"os"
+
+	"github.com/danielbusnz-lgtm/threadsmith/internal/middleware"
 )
 
 func main() {
 	log := slog.New(slog.NewTextHandler(os.Stdout, nil))
 
-	http.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) {
+	mux := http.NewServeMux()
+
+	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("ok"))
 	})
 
-	http.HandleFunc("POST /echo", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("POST /echo", func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
@@ -25,7 +29,7 @@ func main() {
 		w.Write(body)
 	})
 
-	http.HandleFunc("POST /v1/chat/completions", func(w http.ResponseWriter, r *http.Request) {
+	mux.HandleFunc("POST /v1/chat/completions", func(w http.ResponseWriter, r *http.Request) {
 		defer r.Body.Close()
 		body, err := io.ReadAll(r.Body)
 		if err != nil {
@@ -60,7 +64,7 @@ func main() {
 
 	addr := ":8080"
 	log.Info("threadsmith gateway listening", "addr", addr)
-	if err := http.ListenAndServe(addr, nil); err != nil {
+	if err := http.ListenAndServe(addr, middleware.Logging(mux)); err != nil {
 		log.Error("server failed", "err", err)
 		os.Exit(1)
 	}
