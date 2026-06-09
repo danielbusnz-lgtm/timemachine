@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/danielbusnz-lgtm/threadsmith/internal/middleware"
+	"github.com/danielbusnz-lgtm/timemachine/internal/middleware"
 )
 
 func main() {
@@ -63,7 +63,7 @@ func main() {
 	})
 
 	addr := ":8080"
-	log.Info("threadsmith gateway listening", "addr", addr)
+	log.Info("timemachine gateway listening", "addr", addr)
 	if err := http.ListenAndServe(addr, middleware.Logging(mux)); err != nil {
 		log.Error("server failed", "err", err)
 		os.Exit(1)

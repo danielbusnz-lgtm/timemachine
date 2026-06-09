@@ -1,3 +1,3 @@
-module github.com/danielbusnz-lgtm/threadsmith
+module github.com/danielbusnz-lgtm/timemachine
 
 go 1.26
