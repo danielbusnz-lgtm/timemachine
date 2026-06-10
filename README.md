@@ -1,6 +1,7 @@
 # timemachine
 
-[![Go version](https://img.shields.io/badge/go-1.26-00ADD8?style=flat-square&logo=go)](go.mod)
+[![CI](https://github.com/danielbusnz-lgtm/timemachine/actions/workflows/ci.yml/badge.svg)](https://github.com/danielbusnz-lgtm/timemachine/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/danielbusnz-lgtm/timemachine)](https://goreportcard.com/report/github.com/danielbusnz-lgtm/timemachine)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
 Point-in-time research API. Give it a query and a date; it returns only what was knowable on or before that date.
@@ -45,32 +46,6 @@ curl -s http://localhost:8080/research \
 ```
 
 A bare `as_of` date means end of that day UTC, the natural reading of "as of January 15th". RFC 3339 timestamps work too. v1 researches up to 10 caller-supplied seed URLs per job; query-to-URL discovery comes with later sources.
-
-## Architecture
-
-One principle: plain Go orchestrator, one LLM call at the end, date filtering in exactly one function.
-
-```
-POST /research ──> [cache: hash(query, as_of, urls)] ──HIT──> return
-                          │ MISS
-                          v
-    ┌──────────────── Orchestrator ─────────────────┐
-    │  1. fan out to sources                        │
-    │       └── wayback   (CDX + snapshot fetch)    │
-    │  2. every doc re-filtered: timestamp <= as_of │
-    │  3. merge, dedup by normalized URL            │
-    │  4. one LLM synthesis call                    │
-    │  5. cache the result, forever                 │
-    └────────────────────────────────────────────────┘
-```
-
-The `Source` interface is the extension point. Adding an archive = one new implementation of `Fetch(ctx, query, asOf) ([]Doc, error)`. Sources may do their own date handling as an optimization, but the orchestrator re-filters every returned document through the cutoff regardless. The guarantee lives in one function.
-
-## Roadmap
-
-- **v1** (done): synchronous research loop, Wayback source, cutoff filter, in-memory cache, one synthesis call.
-- **v2**: async job queue (`POST /research` returns a job ID), worker pool, errgroup fan-out, EDGAR as second source, Redis cache.
-- **v3**: news archives, BM25 ranking, object-store cold cache, per-source rate limits.
 
 ## License
 
