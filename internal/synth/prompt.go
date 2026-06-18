@@ -5,7 +5,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/danielbusnz-lgtm/timemachine/internal/research"
+	"github.com/danielbusnz/timemachine/internal/research"
 )
 
 // systemPrompt pins the model to the as-of date and to the provided

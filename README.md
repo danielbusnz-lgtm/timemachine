@@ -1,7 +1,7 @@
 # timemachine
 
-[![CI](https://github.com/danielbusnz-lgtm/timemachine/actions/workflows/ci.yml/badge.svg)](https://github.com/danielbusnz-lgtm/timemachine/actions/workflows/ci.yml)
-[![Go Report Card](https://goreportcard.com/badge/github.com/danielbusnz-lgtm/timemachine)](https://goreportcard.com/report/github.com/danielbusnz-lgtm/timemachine)
+[![CI](https://github.com/danielbusnz/timemachine/actions/workflows/ci.yml/badge.svg)](https://github.com/danielbusnz/timemachine/actions/workflows/ci.yml)
+[![Go Report Card](https://goreportcard.com/badge/github.com/danielbusnz/timemachine)](https://goreportcard.com/report/github.com/danielbusnz/timemachine)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)](LICENSE)
 
 Point-in-time research API. Give it a query and a date; it returns only what was knowable on or before that date.
@@ -19,7 +19,7 @@ Not built yet: the async job queue, additional sources (EDGAR, news archives), a
 Requires Go 1.26+ and one LLM key for the synthesis step.
 
 ```bash
-git clone https://github.com/danielbusnz-lgtm/timemachine
+git clone https://github.com/danielbusnz/timemachine
 cd timemachine
 OPENAI_API_KEY=sk-... go run ./cmd/gateway   # or ANTHROPIC_API_KEY
 ```

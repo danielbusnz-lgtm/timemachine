@@ -16,7 +16,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/danielbusnz-lgtm/timemachine/internal/research"
+	"github.com/danielbusnz/timemachine/internal/research"
 )
 
 const (
@@ -135,7 +135,7 @@ func (c *Client) get(ctx context.Context, u string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
-	req.Header.Set("User-Agent", "timemachine/0.1 (point-in-time research; github.com/danielbusnz-lgtm/timemachine)")
+	req.Header.Set("User-Agent", "timemachine/0.1 (point-in-time research; github.com/danielbusnz/timemachine)")
 
 	resp, err := c.http.Do(req)
 	if err != nil {

@@ -9,11 +9,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/danielbusnz-lgtm/timemachine/internal/cache"
-	"github.com/danielbusnz-lgtm/timemachine/internal/middleware"
-	"github.com/danielbusnz-lgtm/timemachine/internal/research"
-	"github.com/danielbusnz-lgtm/timemachine/internal/sources/wayback"
-	"github.com/danielbusnz-lgtm/timemachine/internal/synth"
+	"github.com/danielbusnz/timemachine/internal/cache"
+	"github.com/danielbusnz/timemachine/internal/middleware"
+	"github.com/danielbusnz/timemachine/internal/research"
+	"github.com/danielbusnz/timemachine/internal/sources/wayback"
+	"github.com/danielbusnz/timemachine/internal/synth"
 )
 
 // researchRequest is the v1 wire format. as_of takes "2021-03-15" or full

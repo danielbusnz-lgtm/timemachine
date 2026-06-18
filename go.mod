@@ -1,3 +1,3 @@
-module github.com/danielbusnz-lgtm/timemachine
+module github.com/danielbusnz/timemachine
 
 go 1.26

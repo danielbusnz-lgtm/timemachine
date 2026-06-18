@@ -12,7 +12,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/danielbusnz-lgtm/timemachine/internal/research"
+	"github.com/danielbusnz/timemachine/internal/research"
 )
 
 type Store interface {

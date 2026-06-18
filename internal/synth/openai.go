@@ -11,7 +11,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/danielbusnz-lgtm/timemachine/internal/research"
+	"github.com/danielbusnz/timemachine/internal/research"
 )
 
 const (
